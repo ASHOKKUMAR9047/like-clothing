@@ -1,0 +1,34 @@
+# Dependencies
+node_modules/
+frontend/node_modules/
+
+# Production builds
+dist/
+frontend/dist/
+out/
+
+# .NET / C# build artifacts
+bin/
+obj/
+backend/**/bin/
+backend/**/obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Environment files and credentials
+.env.local
+.neon
+
+# OS generated files
+.DS_Store
+.DS_Store?
+ehthumbs.db
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
