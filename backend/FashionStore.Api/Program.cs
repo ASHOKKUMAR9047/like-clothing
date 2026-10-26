@@ -121,6 +121,7 @@ using (var scope = app.Services.CreateScope())
 
 // 8. HTTP Pipeline
 app.UseCors("AllowClientApps");
+app.UseDefaultFiles();
 app.UseStaticFiles();
 
 // Always enable Swagger for QA and front-end integration
@@ -135,6 +136,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapFallbackToFile("index.html");
 
 // Health Check
 app.MapGet("/health", () => Results.Ok(new
