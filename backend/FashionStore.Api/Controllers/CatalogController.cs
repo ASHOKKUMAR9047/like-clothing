@@ -659,6 +659,42 @@ namespace FashionStore.Api.Controllers
             return Ok(ApiResponse<string>.Ok(fileUrl, "Image uploaded instantly."));
         }
 
+        [HttpPost("upload-video")]
+        [RequestSizeLimit(104857600)] // 100 MB Limit
+        public async Task<ActionResult<ApiResponse<string>>> UploadVideo([FromForm] IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+            {
+                return BadRequest(ApiResponse<string>.Fail("No video file uploaded."));
+            }
+
+            var allowedExtensions = new[] { ".mp4", ".webm", ".ogg", ".mov", ".mkv", ".m4v" };
+            var ext = System.IO.Path.GetExtension(file.FileName).ToLowerInvariant();
+            if (!allowedExtensions.Contains(ext))
+            {
+                return BadRequest(ApiResponse<string>.Fail("Only video files (.mp4, .webm, .ogg, .mov, .mkv, .m4v) are permitted."));
+            }
+
+            var uploadsFolder = System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot", "uploads");
+            if (!System.IO.Directory.Exists(uploadsFolder))
+            {
+                System.IO.Directory.CreateDirectory(uploadsFolder);
+            }
+
+            var fileName = $"{Guid.NewGuid()}{ext}";
+            var filePath = System.IO.Path.Combine(uploadsFolder, fileName);
+
+            using (var stream = new System.IO.FileStream(filePath, System.IO.FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            var req = HttpContext.Request;
+            var fileUrl = $"{req.Scheme}://{req.Host}/uploads/{fileName}";
+
+            return Ok(ApiResponse<string>.Ok(fileUrl, "Video uploaded successfully."));
+        }
+
         // GET /api/v1/catalog/showcase-banners
         [HttpGet("showcase-banners")]
         public async Task<ActionResult<ApiResponse<List<ShowcaseBanner>>>> GetShowcaseBanners()

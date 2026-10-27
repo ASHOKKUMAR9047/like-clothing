@@ -38,8 +38,16 @@ builder.Services.AddDbContext<FashionStoreDbContext>(options =>
 builder.Services.AddScoped<IRazorpayPaymentService, RazorpayPaymentService>();
 builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
 
-// 3. Controllers
+// 3. Controllers & Large File Upload Support (Videos up to 100MB)
 builder.Services.AddControllers();
+builder.Services.Configure<Microsoft.AspNetCore.Http.Features.FormOptions>(options =>
+{
+    options.MultipartBodyLengthLimit = 104857600; // 100 MB
+});
+builder.WebHost.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.Limits.MaxRequestBodySize = 104857600; // 100 MB
+});
 
 // 4. CORS Policy (Dynamic origin allowance - no hardcoded IP addresses)
 builder.Services.AddCors(options =>

@@ -439,11 +439,10 @@ export const ProductDetailPage: React.FC = () => {
                     setActiveMediaIndex(idx);
                     setIsVideoActive(false);
                   }}
-                  className={`relative w-16 sm:w-18 aspect-[3/4] rounded-xl overflow-hidden border-2 transition-all shrink-0 bg-slate-100 ${
-                    isSelected
+                  className={`relative w-16 sm:w-18 aspect-[3/4] rounded-xl overflow-hidden border-2 transition-all shrink-0 bg-slate-100 ${isSelected
                       ? 'border-brand-dark shadow-md ring-2 ring-brand-orange/40 scale-102'
                       : 'border-brand-border/80 hover:border-slate-400 opacity-80 hover:opacity-100'
-                  }`}
+                    }`}
                   title={img.altText || `Angle ${idx + 1}`}
                 >
                   <img src={img.url} alt={img.altText || product.title} className="w-full h-full object-cover object-top" />
@@ -462,11 +461,10 @@ export const ProductDetailPage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setIsVideoActive(true)}
-                className={`relative w-16 sm:w-18 aspect-[3/4] rounded-xl overflow-hidden border-2 transition-all shrink-0 bg-slate-900 flex flex-col items-center justify-center text-white ${
-                  isVideoActive
+                className={`relative w-16 sm:w-18 aspect-[3/4] rounded-xl overflow-hidden border-2 transition-all shrink-0 bg-slate-900 flex flex-col items-center justify-center text-white ${isVideoActive
                     ? 'border-brand-orange shadow-md ring-2 ring-brand-orange scale-102'
                     : 'border-brand-border/80 hover:border-brand-orange opacity-90'
-                }`}
+                  }`}
                 title="Watch Product Video"
               >
                 {product.images[0]?.url && (
@@ -553,9 +551,8 @@ export const ProductDetailPage: React.FC = () => {
               aria-label={isWishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
             >
               <Heart
-                className={`w-4 h-4 ${
-                  isWishlisted ? 'fill-brand-orange text-brand-orange' : 'stroke-[2]'
-                }`}
+                className={`w-4 h-4 ${isWishlisted ? 'fill-brand-orange text-brand-orange' : 'stroke-[2]'
+                  }`}
               />
             </button>
 
@@ -633,11 +630,10 @@ export const ProductDetailPage: React.FC = () => {
                       type="button"
                       onClick={() => handleColorSelect(c.name)}
                       title={c.name}
-                      className={`w-8 h-8 rounded-full border-2 transition-all p-0.5 cursor-pointer ${
-                        isSelected
+                      className={`w-8 h-8 rounded-full border-2 transition-all p-0.5 cursor-pointer ${isSelected
                           ? 'border-brand-orange scale-110 shadow-md ring-2 ring-brand-orange/40'
                           : 'border-transparent hover:scale-105'
-                      }`}
+                        }`}
                     >
                       <span
                         className="block w-full h-full rounded-full border border-black/15 shadow-xs"
@@ -673,13 +669,12 @@ export const ProductDetailPage: React.FC = () => {
                     key={variant.id}
                     disabled={isOutOfStock}
                     onClick={() => setSelectedSize(variant.size)}
-                    className={`min-w-12 h-11 px-3 text-xs font-bold rounded-xl border transition-all flex flex-col items-center justify-center cursor-pointer ${
-                      isSelected
+                    className={`min-w-12 h-11 px-3 text-xs font-bold rounded-xl border transition-all flex flex-col items-center justify-center cursor-pointer ${isSelected
                         ? 'bg-brand-dark text-white border-brand-dark shadow-sm'
                         : isOutOfStock
-                        ? 'bg-gray-100 text-gray-400 border-gray-200 line-through cursor-not-allowed'
-                        : 'bg-white text-brand-dark border-brand-border hover:border-brand-dark'
-                    }`}
+                          ? 'bg-gray-100 text-gray-400 border-gray-200 line-through cursor-not-allowed'
+                          : 'bg-white text-brand-dark border-brand-border hover:border-brand-dark'
+                      }`}
                   >
                     <span>{variant.size}</span>
                   </button>
@@ -923,9 +918,8 @@ export const ProductDetailPage: React.FC = () => {
                     className="p-1 text-amber-500 hover:scale-120 transition-transform cursor-pointer"
                   >
                     <Star
-                      className={`w-6 h-6 ${
-                        star <= newReviewRating ? 'fill-amber-500 text-amber-500' : 'text-slate-300'
-                      }`}
+                      className={`w-6 h-6 ${star <= newReviewRating ? 'fill-amber-500 text-amber-500' : 'text-slate-300'
+                        }`}
                     />
                   </button>
                 ))}
